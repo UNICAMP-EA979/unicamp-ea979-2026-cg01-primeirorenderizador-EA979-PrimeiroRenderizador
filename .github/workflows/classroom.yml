@@ -1,0 +1,117 @@
+name: Autograding Tests
+on: push
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install .[tests]
+      - name: test_scale
+        id: testscale
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+            test-name: test_scale
+            setup-command: ""
+            command: pytest tests/urenderer/node/test_node.py::TestNode::test_scale
+            timeout: 2
+            max-score: 5
+      - name: test_translation
+        id: testtranslation
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+            test-name: test_translation
+            setup-command: ""
+            command: pytest tests/urenderer/node/test_node.py::TestNode::test_translation
+            timeout: 2
+            max-score: 5
+      - name: test_rotation
+        id: testrotation
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+            test-name: test_rotation
+            setup-command: ""
+            command: pytest tests/urenderer/node/test_node.py::TestNode::test_rotation
+            timeout: 2
+            max-score: 5
+      - name: test_composition
+        id: testcomposition
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+            test-name: test_composition
+            setup-command: ""
+            command: pytest tests/urenderer/node/test_node.py::TestNode::test_composition
+            timeout: 2
+            max-score: 5
+      - name: test_camera
+        id: testcamera
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+            test-name: test_camera
+            setup-command: ""
+            command: pytest tests/urenderer/node/test_camera.py
+            timeout: 2
+            max-score: 10
+      - name: test_runtime
+        id: testruntime
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+            test-name: test_runtime
+            setup-command: ""
+            command: pytest tests/urenderer/application/test_runtime.py
+            timeout: 2
+            max-score: 20
+      - name: test_stage_vertex_shading
+        id: teststagevertexshading
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+            test-name: test_stage_vertex_shading
+            setup-command: ""
+            command: pytest tests/urenderer/renderer/test_pyplot_renderer.py::TestPyplotRenderer::test_stage_vertex_shading
+            timeout: 2
+            max-score: 20
+      - name: test_stage_clipping
+        id: teststageclipping
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+            test-name: test_stage_clipping
+            setup-command: ""
+            command: pytest tests/urenderer/renderer/test_pyplot_renderer.py::TestPyplotRenderer::test_stage_clipping
+            timeout: 2
+            max-score: 20
+      - name: test_stage_screen_mapping
+        id: teststagescreenmapping
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+            test-name: test_stage_screen_mapping
+            setup-command: ""
+            command: pytest tests/urenderer/renderer/test_pyplot_renderer.py::TestPyplotRenderer::test_stage_screen_mapping
+            timeout: 2
+            max-score: 10
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1
+        env:
+          TESTSCALE_RESULTS: "${{steps.testscale.outputs.result}}"
+          TESTTRANSLATION_RESULTS: "${{steps.testtranslation.outputs.result}}"
+          TESTROTATION_RESULTS: "${{steps.testrotation.outputs.result}}"
+          TESTCOMPOSITION_RESULTS: "${{steps.testcomposition.outputs.result}}"
+          TESTCAMERA_RESULTS: "${{steps.testcamera.outputs.result}}"
+          TESTRUNTIME_RESULTS: "${{steps.testruntime.outputs.result}}"
+          TESTSTAGEVERTEXSHADING_RESULTS: "${{steps.teststagevertexshading.outputs.result}}"
+          TESTSTAGECLIPPING_RESULTS: "${{steps.teststageclipping.outputs.result}}"
+          TESTSTAGESCREENMAPPING_RESULTS: "${{steps.teststagescreenmapping.outputs.result}}"
+        with:
+            runners: testcomposition,teststageclipping,teststagescreenmapping,testruntime,testtranslation,teststagevertexshading,testscale,testrotation,testcamera
+      

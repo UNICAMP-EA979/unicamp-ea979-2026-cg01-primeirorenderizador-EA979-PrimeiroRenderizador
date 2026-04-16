@@ -1,0 +1,11 @@
+tests/urenderer/node/test_node.py::TestNode::test_scale 5
+tests/urenderer/node/test_node.py::TestNode::test_translation 5
+tests/urenderer/node/test_node.py::TestNode::test_rotation 5
+tests/urenderer/node/test_node.py::TestNode::test_composition 5
+
+tests/urenderer/node/test_camera.py 10
+tests/urenderer/application/test_runtime.py 20
+
+tests/urenderer/renderer/test_pyplot_renderer.py::TestPyplotRenderer::test_stage_vertex_shading 20
+tests/urenderer/renderer/test_pyplot_renderer.py::TestPyplotRenderer::test_stage_clipping 20
+tests/urenderer/renderer/test_pyplot_renderer.py::TestPyplotRenderer::test_stage_screen_mapping 10
