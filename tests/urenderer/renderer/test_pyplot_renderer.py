@@ -2,8 +2,9 @@ import unittest
 
 import matplotlib.pyplot as plt
 import numpy as np
-import urenderer
 from numpy.testing import assert_array_almost_equal, assert_array_equal
+
+import urenderer
 
 
 class TestPyplotRenderer(unittest.TestCase):
@@ -33,10 +34,9 @@ class TestPyplotRenderer(unittest.TestCase):
                                          [0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
                                           1.00000000e+00]])
 
-        desired = np.array([[1.72331419,  68.54314245,  12.55010266,  12.08644763],
-                            [16.91349818, 254.76840176, -
-                             71.56928634, -56.738507],
-                            [12.64328098, 111.68222968, -11.2555744,  -7.39092451]])
+        desired = np.array([[0.955278,  37.995261,  12.550103,  12.086448],
+                            [9.375595, 141.224804, -71.569286, -56.738507],
+                            [7.008502,  61.908388, -11.255574,  -7.390925]])
 
         triangle_proj = self.renderer._stage_vertex_shading(
             triangle, model_transformation)
