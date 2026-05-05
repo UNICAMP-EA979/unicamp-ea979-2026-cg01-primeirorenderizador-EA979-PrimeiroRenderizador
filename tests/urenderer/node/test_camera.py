@@ -1,8 +1,9 @@
 import unittest
 
 import numpy as np
-import urenderer
 from numpy.testing import assert_array_almost_equal
+
+import urenderer
 
 
 class TestCamera(unittest.TestCase):
@@ -15,9 +16,9 @@ class TestCamera(unittest.TestCase):
         camera.screen_height = 1080.0
         camera.vertical_fov = 60.0
 
-        matrix = np.array([[1.75759066,  0.,  0.,  0.],
-                           [0.,  3.12460562,  0.,  0.],
-                           [0.,  0., -1.22222222, -2.22222222],
+        matrix = np.array([[0.974279,  0.,  0.,  0.],
+                           [0.,  1.732051,  0.,  0.],
+                           [0.,  0., -1.222222, -2.222222],
                            [0.,  0., -1.,  0.]])
 
         assert_array_almost_equal(camera.projection_matrix, matrix)
@@ -28,9 +29,9 @@ class TestCamera(unittest.TestCase):
         camera.screen_height = 789.0
         camera.vertical_fov = 90.0
 
-        matrix = np.array([[-0.86721271,  0.,  0.,  0.],
-                           [0., -0.50120278,  0.,  0.],
-                           [0.,  0., -1.00702145, -2.25388509],
+        matrix = np.array([[1.730263,  0.,  0.,  0.],
+                           [0.,  1.,  0.,  0.],
+                           [0.,  0., -1.007021, -2.253885],
                            [0.,  0., -1.,  0.]])
 
         assert_array_almost_equal(camera.projection_matrix, matrix)
