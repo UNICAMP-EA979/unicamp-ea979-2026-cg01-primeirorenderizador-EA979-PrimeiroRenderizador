@@ -22,6 +22,16 @@ class Camera(Node):
         self.screen_width = 1920.0
         self.screen_height = 1080.0
         self.vertical_fov = 60.0
+    
+    @property
+    def aspect_ratio(self) -> float:
+        '''
+        Camera aspect ratio
+
+        Returns:
+            float: aspect ratio
+        '''
+        return self.screen_width / self.screen_height
 
     @property
     def projection_matrix(self) -> np.ndarray:
@@ -35,6 +45,7 @@ class Camera(Node):
         ## SEU CÓDIGO AQUI #####################################################
         # Crie a matriz de projeção utilizando a fórmula
         matrix = np.zeros((4, 4))
+        
 
         #########################################################################
 
