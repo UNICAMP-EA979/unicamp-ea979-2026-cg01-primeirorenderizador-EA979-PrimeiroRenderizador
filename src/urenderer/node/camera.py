@@ -42,11 +42,12 @@ class Camera(Node):
             np.ndarray: 4x4 projection matrix
         '''
 
-        ## SEU CÓDIGO AQUI #####################################################
-        # Crie a matriz de projeção utilizando a fórmula
         matrix = np.zeros((4, 4))
-        
-
-        #########################################################################
+        c = 1 / np.tan(np.radians(self.vertical_fov) / 2)
+        matrix[0, 0] = c / self.aspect_ratio
+        matrix[1, 1] = c
+        matrix[2, 2] = - (self.far_plane + self.near_plane) / (self.far_plane - self.near_plane)
+        matrix[2, 3] = - (2 * self.far_plane * self.near_plane) / (self.far_plane - self.near_plane)
+        matrix[3, 2] = - 1
 
         return matrix
