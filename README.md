@@ -29,7 +29,7 @@ Os arquivos indicados possuem mais informações quando necessário.
 ### urenderer
 
 - [ ] urenderer/node/node.py: implemente a construção de matrizes de transformação para rotação, translação e escala, junto da concatenação dessas transformações.
-- [ ] urenderer/node/camera.py: implemente a construção da matriz de projeção perspectiva.
+- [X] urenderer/node/camera.py: implemente a construção da matriz de projeção perspectiva.
 
 > $$  P = \begin{bmatrix}
 > c/a & 0 & 0                                                    & 0 \\
